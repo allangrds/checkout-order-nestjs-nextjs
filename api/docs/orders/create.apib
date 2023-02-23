@@ -1,0 +1,24 @@
+### Create [POST]
+
+Create an order.
+
++ Request JSON Message
+
+    + Headers
+
+            Accept: application/json
+
+    + Attributes (object)
+      + items (array, required)
+          + (object)
+              + id: 1 (number, required)
+              + quantity: 2 (number, required)
+      + payment (object)
+          + credit_card: 12345678 (string, required)
+          + card_holder_name: john f. sulivan (string, required)
+          + cvv: 123 (string, required)
+
++ Response 201 (application/json)
+    + Attributes (object)
+      + id: 1 (number, required)
+      + created_at: `2019-10-18-10:05:55` (string, required)

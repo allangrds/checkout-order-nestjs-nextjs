@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: api
+    command: 'npm run start:dev'
+    build: .
+    volumes:
+      - .:/usr/app
+    ports:
+      - 3001:3001
+    restart: on-failure
+  docs:
+    container_name: docs
+    command: 'npm run docs:preview'
+    build: .
+    volumes:
+      - .:/usr/docs
+    ports:
+      - 3006:3006
+    restart: on-failure

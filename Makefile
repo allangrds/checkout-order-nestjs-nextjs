@@ -7,12 +7,20 @@ client-clean:
 client-prune:
 	cd client && docker rmi client-client
 api-up:
-	cd api && docker-compose up
+	cd api && docker-compose up api
 api-down:
-	cd api && docker-compose down
+	cd api && docker-compose down api
 api-clean:
-	cd client && docker rm api && docker rm docs
+	cd client && docker rm api
 api-prune:
-	cd client && docker rmi api-api && docker rmi api-docs
+	cd client && docker rmi api-api
+docs-up:
+	cd api && docker-compose up docs
+docs-down:
+	cd api && docker-compose down docs
+docs-clean:
+	cd client && docker rm docs
+docs-prune:
+	cd client && docker rmi api-docs
 
 

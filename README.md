@@ -1,7 +1,5 @@
 # Mashgin Fullstack Test
 
----
-
 ## Table of content
 
 - [Requeriments](#requeriments)

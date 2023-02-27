@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Pull Request
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '16' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: cd client && npm ci
+    - name: Build project
+      run: cd client && ls && npm run build
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '16' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: cd client && npm ci
+    - name: Run ESLint
+      run: cd client && ls && npm run lint

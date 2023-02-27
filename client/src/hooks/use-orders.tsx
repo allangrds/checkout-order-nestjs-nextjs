@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as http from 'http'
 
 import { useApiContext } from '@/hooks'
-import { createOrder as fetchCreateOrder} from '@/services'
+import { createOrder as fetchCreateOrder } from '@/services'
 import { OrdersResponse } from '@/types'
 
 export const useOrders = () => {

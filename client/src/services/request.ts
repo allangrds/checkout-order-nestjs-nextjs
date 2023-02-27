@@ -21,20 +21,19 @@ const requester = (endpoint: string, options?: http.RequestOptions) => {
     },
   }
 
-  return fetch(url, newOptions)
-    .then(async (response) => {
-      if (!response.ok) {
-        throw new FetchError(response)
-      }
+  return fetch(url, newOptions).then(async (response) => {
+    if (!response.ok) {
+      throw new FetchError(response)
+    }
 
-      try {
-        const data = await response.json()
+    try {
+      const data = await response.json()
 
-        return data
-      } catch (error) {
-        return response
-      }
-    })
+      return data
+    } catch (error) {
+      return response
+    }
+  })
 }
 
 const get = (endpoint: string, options?: http.RequestOptions) => {

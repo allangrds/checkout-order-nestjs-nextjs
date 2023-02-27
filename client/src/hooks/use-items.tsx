@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { useApiContext } from '@/hooks'
-import { listItems as fetchListitems} from '@/services'
+import { listItems as fetchListitems } from '@/services'
 import { ItemsResponse } from '@/types'
 
 export const useItems = () => {

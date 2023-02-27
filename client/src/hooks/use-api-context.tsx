@@ -8,9 +8,7 @@ type ProviderProps = {
   children: React.ReactNode
 }
 export const Provider = ({ children }: ProviderProps) => (
-  <ApiContext.Provider value={request}>
-    { children}
-  </ApiContext.Provider>
+  <ApiContext.Provider value={request}>{children}</ApiContext.Provider>
 )
 
 export const useApiContext = () => {
@@ -21,6 +19,6 @@ export const useApiContext = () => {
   }
 
   return {
-    api: context
+    api: context,
   }
 }

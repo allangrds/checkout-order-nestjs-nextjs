@@ -9,8 +9,7 @@ export const Cart = styled('div', {
   position: 'absolute',
   top: '120%',
   right: 0,
-  paddingTop: '$2',
-  paddingBottom: '$6',
+  paddingY: '$6',
   paddingX: '$8',
   borderRadius: '$md',
   boxShadow: '0 0 0 1px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 5%), 0 12px 24px rgb(0 0 0 / 5%);',
@@ -21,8 +20,12 @@ export const Cart = styled('div', {
 })
 
 export const CartItem = styled('div', {
-  borderBottom: '1px solid $gray3',
-  paddingY: '$4',
+  borderTop: '1px solid $gray3',
+  paddingBottom: '$4',
+
+  '&:not(:first-child)': {
+    paddingTop: '$4',
+  }
 })
 
 export const ItemName = styled('p', {
@@ -37,5 +40,5 @@ export const ItemNormalText = styled('p', {
 export const CartTotalPrice = styled('p', {
   fontSize: '$lg',
   fontWeight: '$semibold',
-  paddingY: '$4',
+  paddingBottom: '$4',
 })

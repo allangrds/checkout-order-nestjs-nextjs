@@ -9,9 +9,15 @@ import * as S from './cart.styles'
 
 type Props = {
   items: CartItem[]
+  onClickCheckout: () => void
+  onClickRemoveItem: (id: number) => void
 }
 
-export const Cart = ({ items = [] }: Props) => {
+export const Cart = ({
+  items = [],
+  onClickCheckout,
+  onClickRemoveItem,
+}: Props) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const itemsOnCart = items.reduce((acc, item) => acc + item.quantity, 0)
   const totalPrice = items.reduce((acc, item) => (
@@ -36,6 +42,26 @@ export const Cart = ({ items = [] }: Props) => {
               )
             }
             {
+              items.length > 0 ? (
+                <>
+                  <S.CartTotalPrice>
+                    Total price: { moneyFormat(totalPrice) }
+                  </S.CartTotalPrice>
+                  <Button
+                    variant="solid"
+                    colorScheme="green"
+                    fullWidth
+                    onClick={onClickCheckout}
+                    css={{
+                      marginBottom: '$6',
+                    }}
+                  >
+                    Checkout
+                  </Button>
+                </>
+              ) : undefined
+            }
+            {
               items.map((item) => (
                 <S.CartItem key={item.id}>
                   <S.ItemName>
@@ -47,24 +73,18 @@ export const Cart = ({ items = [] }: Props) => {
                   <S.ItemNormalText>
                     Price: { moneyFormat(item.unitary_price * item.quantity) }
                   </S.ItemNormalText>
+                  <Button
+                    variant="outline"
+                    onClick={() => onClickRemoveItem(item.id)}
+                    css={{
+                      marginTop: '$4',
+                    }}
+                  >
+                    Remove
+                  </Button>
                 </S.CartItem>
               ))
             }
-            {
-              items.length > 0 ? (
-                <S.CartTotalPrice>
-                  Total price: { moneyFormat(totalPrice) }
-                </S.CartTotalPrice>
-              ) : undefined
-            }
-            <Button
-              variant="solid"
-              colorScheme="green"
-              fullWidth
-              onClick={() => console.log('d')}
-            >
-              Checkout
-            </Button>
           </S.Cart>
         ) : undefined
       }

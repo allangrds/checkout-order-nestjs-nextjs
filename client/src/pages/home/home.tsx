@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { useRouter } from 'next/router'
+
 import { Button, Card, Cart, Container } from '@/components'
 import { useCategories, useItems, useCart } from '@/hooks'
 import { moneyFormat } from '@/utils'
@@ -8,6 +10,7 @@ import { Item } from '@/types'
 import * as S from './home.styles'
 
 export const Home = () => {
+  const router = useRouter()
   const {
     categories,
     loading: loadingCategories,
@@ -20,7 +23,7 @@ export const Home = () => {
     error: errorItems,
     listItems
   } = useItems()
-  const { addItem, items: cartItems } = useCart()
+  const { addItem, items: cartItems, removeItem } = useCart()
 
   React.useEffect(() => {
     listCategories()
@@ -39,6 +42,8 @@ export const Home = () => {
     addItem(formatedItem)
   }
 
+  const handleCheckout = () => router.push('/checkout')
+
   const isLoading = loadingCategories || loadingItems
   const hasError = errorCategories || errorItems
 
@@ -47,33 +52,37 @@ export const Home = () => {
       <S.Header>
         <Container>
           <S.Nav>
-            <Cart items={cartItems}/>
+            <Cart
+              items={cartItems}
+              onClickCheckout={handleCheckout}
+              onClickRemoveItem={removeItem}
+            />
           </S.Nav>
         </Container>
       </S.Header>
-      {
-        isLoading ? (
-          <p>
-            Loading...
-          </p>
-        ) : undefined
-      }
-      {
-        !isLoading && hasError ? (
-          <p>
-            Error on retrieve items. Try again later.
-          </p>
-        ) : undefined
-      }
-      {
-        !isLoading && !hasError && items.length === 0 ? (
-          <p>
-            No items found.
-          </p>
-        ) : undefined
-      }
       <Container>
         <S.Showcase>
+          {
+            isLoading ? (
+              <p>
+                Loading...
+              </p>
+            ) : undefined
+          }
+          {
+            !isLoading && hasError ? (
+              <p>
+                Error on retrieve items. Try again later.
+              </p>
+            ) : undefined
+          }
+          {
+            !isLoading && !hasError && items.length === 0 ? (
+              <p>
+                No items found.
+              </p>
+            ) : undefined
+          }
           {
             items.map(item => (
               <Card key={item.id}>

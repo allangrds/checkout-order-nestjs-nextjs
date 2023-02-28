@@ -5,18 +5,15 @@ import { ApiProvider, CartProvider } from '@/hooks'
 import { injectGlobalStyles } from '@/theme'
 import { Layout } from '@/components'
 
-if (variables.MOCK_API === 'true') {
-  console.log('iniciou')
+const startMock = async () => {
   const { setupMocks } = require('@/mocks')
 
-  console.log('chamou')
   setupMocks()
-  console.log('finalizou')
 }
 
+startMock()
 injectGlobalStyles()
 
-console.log('app')
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApiProvider>

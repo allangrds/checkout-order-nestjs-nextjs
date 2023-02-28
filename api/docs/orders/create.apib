@@ -14,9 +14,10 @@ Create an order.
               + id: 1 (number, required)
               + quantity: 2 (number, required)
       + payment (object)
-          + credit_card: 12345678 (string, required)
+          + card_number: 12345678 (string, required)
           + card_holder_name: john f. sulivan (string, required)
-          + cvv: 123 (string, required)
+          + card_expiration_at: 10/29 (string, required)
+          + card_cvv: 123 (string, required)
 
 + Response 201 (application/json)
     + Attributes (object)

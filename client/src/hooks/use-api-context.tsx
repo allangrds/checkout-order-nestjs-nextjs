@@ -7,7 +7,7 @@ const ApiContext = React.createContext(request)
 type ProviderProps = {
   children: React.ReactNode
 }
-export const Provider = ({ children }: ProviderProps) => (
+export const ApiProvider = ({ children }: ProviderProps) => (
   <ApiContext.Provider value={request}>{children}</ApiContext.Provider>
 )
 

@@ -7,7 +7,7 @@ import { OrdersResponse } from '@/types'
 
 export const useOrders = () => {
   const [order, setOrder] = React.useState<{} | OrdersResponse>({})
-  const [loading, setLoading] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(true)
   const [error, setError] = React.useState<string | null>(null)
   const { api } = useApiContext()
 

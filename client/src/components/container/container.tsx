@@ -1,17 +1,17 @@
 import * as React from 'react'
 
-import * as s from './styles'
+import * as S from './container.styles'
 
 type Props = {
   children: React.ReactNode
 }
 
 const BaseContainer = ({ children }: Props) => (
-  <s.Wrapper>
-    <s.Container>
+  <S.Wrapper>
+    <S.Container>
       { children }
-    </s.Container>
-  </s.Wrapper>
+    </S.Container>
+  </S.Wrapper>
 )
 
 export const Container = React.memo(BaseContainer)

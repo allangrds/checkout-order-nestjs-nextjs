@@ -1,8 +1,10 @@
-import * as s from './styles'
+import * as S from './styles'
 
 type Props = {
   colorScheme?: 'green' | 'gray'
   children: React.ReactNode
+  css?: any
+  fullWidth?: boolean
   onClick: () => void
   variant?: 'solid' | 'outline'
 }
@@ -10,14 +12,18 @@ type Props = {
 export const Button = ({
   colorScheme,
   children,
+  css,
+  fullWidth,
   onClick,
   variant,
 }: Props) => (
-  <s.Button
+  <S.Button
     colorScheme={colorScheme}
+    fullWidth={fullWidth}
     onClick={onClick}
     variant={variant}
+    css={css}
   >
     { children }
-  </s.Button>
+  </S.Button>
 )

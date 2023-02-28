@@ -8,7 +8,7 @@ export const useCategories = () => {
   const [categories, setCategories] = React.useState<[] | CategoriesResponse>(
     []
   )
-  const [loading, setLoading] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(true)
   const [error, setError] = React.useState<string | null>(null)
   const { api } = useApiContext()
 

@@ -36,6 +36,11 @@ export const Button = styled('button', {
       },
       outline: {},
     },
+    fullWidth: {
+      true: {
+        width: '100%',
+      },
+    },
   },
   compoundVariants: [
     {

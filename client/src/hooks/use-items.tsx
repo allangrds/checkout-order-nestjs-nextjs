@@ -6,7 +6,7 @@ import { ItemsResponse } from '@/types'
 
 export const useItems = () => {
   const [items, setItems] = React.useState<[] | ItemsResponse>([])
-  const [loading, setLoading] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(true)
   const [error, setError] = React.useState<string | null>(null)
   const { api } = useApiContext()
 

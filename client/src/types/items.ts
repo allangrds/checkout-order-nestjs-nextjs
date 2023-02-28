@@ -1,4 +1,4 @@
-type Item = {
+export type Item = {
   id: number
   category_id: number
   image_id: string

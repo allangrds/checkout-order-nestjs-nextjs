@@ -1,7 +1,9 @@
-import { AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 
 import { variables } from '@/config'
 import { Provider as ApiProvider } from '@/hooks'
+import { injectGlobalStyles } from '@/theme'
+import { Layout } from '@/components'
 
 if (variables.MOCK_API === 'true') {
   const { setupMocks } = require('@/mocks')
@@ -9,10 +11,14 @@ if (variables.MOCK_API === 'true') {
   setupMocks()
 }
 
+injectGlobalStyles()
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApiProvider>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ApiProvider>
   )
 }

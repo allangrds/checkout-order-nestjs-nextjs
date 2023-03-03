@@ -6,7 +6,7 @@ export const Wrapper = styled('main', {
   justifyContent: 'center',
 })
 
-export const Container = styled('main', {
+export const Container = styled('div', {
   width: '100%',
   maxWidth: '1280px',
 })

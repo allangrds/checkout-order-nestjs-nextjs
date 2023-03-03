@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app'
 import { Layout } from '@/components'
 import { variables } from '@/config'
 import { ApiProvider, CartProvider } from '@/hooks'
+import { request } from '@/services/request'
 import { injectGlobalStyles } from '@/theme'
 
 import '@/lib/i18n'
@@ -12,6 +13,7 @@ import '@/lib/i18n'
 injectGlobalStyles()
 
 const API_MOCKING = variables.MOCK_API === 'true'
+const api = request(variables.API_BASE_URL || '')
 
 export default function App ({ Component, pageProps }: AppProps) {
   const [shouldRender, setShouldRender] = React.useState(!API_MOCKING)
@@ -33,7 +35,7 @@ export default function App ({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <ApiProvider>
+    <ApiProvider api={api}>
       <CartProvider>
         <Layout>
           <Component {...pageProps} />

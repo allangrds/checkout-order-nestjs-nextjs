@@ -12,10 +12,8 @@ export const useCategories = () => {
   const [error, setError] = React.useState<string | null>(null)
   const { api } = useApiContext()
 
-  const listCategories = () => {
-    setLoading(true)
-
-    return fetchListCategories(api)
+  const listCategories = () => (
+    fetchListCategories(api)
       .then((res) => {
         setCategories(res)
         setLoading(false)
@@ -24,7 +22,7 @@ export const useCategories = () => {
         setError(err.message)
         setLoading(false)
       })
-  }
+  )
 
   return {
     categories,

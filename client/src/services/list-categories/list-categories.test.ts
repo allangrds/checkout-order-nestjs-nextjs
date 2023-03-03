@@ -1,19 +1,17 @@
 import { listCategories } from './list-categories'
 
-const mockResponse = {
-  items: [
-    {
-      "id": 1,
-      "image_id": "f3fbf57b118fa9",
-      "name": "Bakery"
-    },
-    {
-      "id": 2,
-      "image_id": "b271afbefdc554",
-      "name": "Entrees"
-    },
-  ],
-}
+const mockResponse = [
+  {
+    "id": 1,
+    "image_id": "f3fbf57b118fa9",
+    "name": "Bakery"
+  },
+  {
+    "id": 2,
+    "image_id": "b271afbefdc554",
+    "name": "Entrees"
+  },
+]
 
 const mockApi = {
   get: jest.fn().mockResolvedValue(mockResponse),

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
+    "eslint": "next lint",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
   },
   "dependencies": {
@@ -37,7 +39,19 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sort-destructure-keys": "^1.5.0",
     "msw": "^1.0.1",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "13.2.0",
+    "@testing-library/user-event": "14.2.0",
+    "@types/testing-library__jest-dom": "5.14.5",
+    "jest": "28.1.0",
+    "jest-environment-jsdom": "28.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-sort-destructure-keys": "^1.5.0"
   },
   "msw": {
     "workerDirectory": "public"

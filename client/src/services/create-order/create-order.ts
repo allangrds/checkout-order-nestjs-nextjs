@@ -1,11 +1,11 @@
-import * as http from 'http'
-import { OrdersResponse } from '@/types'
+import { Api, OrdersRequest, OrdersResponse } from '@/types'
 
 export const createOrder = (
-  api: any,
-  options: http.RequestOptions
+  api: Api,
+  payload: OrdersRequest
 ): Promise<OrdersResponse> => {
   const endpoint = 'orders'
+  const body = JSON.stringify(payload)
 
-  return api.post(endpoint, options)
+  return api.post(endpoint, body)
 }

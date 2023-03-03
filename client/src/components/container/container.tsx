@@ -8,9 +8,7 @@ type Props = {
 
 const BaseContainer = ({ children }: Props) => (
   <S.Wrapper>
-    <S.Container>
-      { children }
-    </S.Container>
+    <S.Container>{children}</S.Container>
   </S.Wrapper>
 )
 

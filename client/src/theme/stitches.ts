@@ -1,10 +1,4 @@
-import {
-  blue,
-  gray,
-  green,
-  red,
-  yellow,
-} from '@radix-ui/colors'
+import { blue, gray, green, red, yellow } from '@radix-ui/colors'
 import { createStitches } from '@stitches/react'
 
 const themeSpace = {
@@ -110,7 +104,8 @@ const stitches = createStitches({
       wider: '0.05em',
       widest: '0.1em',
     },
-    radii: { // for border-radius
+    radii: {
+      // for border-radius
       none: '0',
       sm: '0.125rem',
       base: '0.25rem',
@@ -121,10 +116,12 @@ const stitches = createStitches({
       '3xl': '1.5rem',
       full: '9999px',
     },
-    space: { // for padding, margin, and top, left, right, bottom styles.
+    space: {
+      // for padding, margin, and top, left, right, bottom styles.
       ...themeSpace,
     },
-    sizes: { // for width, height, and maxWidth, minWidth, maxHeight, minHeight styles.
+    sizes: {
+      // for width, height, and maxWidth, minWidth, maxHeight, minHeight styles.
       ...themeSpace,
     },
   },
@@ -148,7 +145,8 @@ export const injectGlobalStyles = stitches.globalCss({
   },
   body: {
     '-webkit-font-smoothing': 'antialiased',
-    fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+    fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
     'line-height': 1.5,
   },
   'html, body': {

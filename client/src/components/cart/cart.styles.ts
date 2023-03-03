@@ -12,7 +12,8 @@ export const Cart = styled('div', {
   paddingY: '$6',
   paddingX: '$8',
   borderRadius: '$md',
-  boxShadow: '0 0 0 1px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 5%), 0 12px 24px rgb(0 0 0 / 5%);',
+  boxShadow:
+    '0 0 0 1px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 5%), 0 12px 24px rgb(0 0 0 / 5%);',
   zIndex: 100,
   maxHeight: '280px',
   width: '300px',
@@ -25,7 +26,7 @@ export const CartItem = styled('div', {
 
   '&:not(:first-child)': {
     paddingTop: '$4',
-  }
+  },
 })
 
 export const ItemName = styled('p', {

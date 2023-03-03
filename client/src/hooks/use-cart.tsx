@@ -2,13 +2,14 @@ import * as React from 'react'
 
 import { CartItem } from '@/types'
 
-type CartItemToAdd = Omit<CartItem, "quantity">
+type CartItemToAdd = Omit<CartItem, 'quantity'>
 
 type Cart = {
   items: CartItem[]
   addItem: (item: CartItemToAdd) => void
   removeItem: (id: number) => void
   removeQuantity: (id: number) => void
+  clearCart: () => void
 }
 
 type CartAction =
@@ -19,33 +20,38 @@ type CartAction =
       }
     }
   | {
-    type: 'REMOVE_ITEM'
-    payload: {
-      id: number
+      type: 'REMOVE_ITEM'
+      payload: {
+        id: number
+      }
     }
-  }
   | {
-    type: 'REMOVE_ITEM_QUANTITY'
-    payload: {
-      id: number
+      type: 'REMOVE_ITEM_QUANTITY'
+      payload: {
+        id: number
+      }
     }
-  }
-
+  | {
+      type: 'CLEAR_CART'
+    }
 
 const CartContext = React.createContext<Cart>({
   items: [],
-  addItem: () => {},
-  removeItem: () => {},
-  removeQuantity: () => {},
+  addItem: () => null,
+  removeItem: () => null,
+  removeQuantity: () => null,
+  clearCart: () => null,
 })
 
 const cartReducer = (state: CartItem[], action: CartAction): CartItem[] => {
   switch (action.type) {
     case 'ADD_ITEM':
-      const itemExists = state.find(item => item.id === action.payload.item.id)
+      const itemExists = state.find(
+        (item) => item.id === action.payload.item.id
+      )
 
       if (itemExists) {
-        return state.map(item => {
+        return state.map((item) => {
           if (item.id === action.payload.item.id) {
             return { ...item, quantity: item.quantity + 1 }
           }
@@ -56,15 +62,19 @@ const cartReducer = (state: CartItem[], action: CartAction): CartItem[] => {
 
       const formatedItem = {
         ...action.payload.item,
-        quantity: 1
+        quantity: 1,
       }
 
       return [...state, formatedItem]
     case 'REMOVE_ITEM':
-      return state.filter(item => item.id !== action.payload.id)
+      return state.filter((item) => item.id !== action.payload.id)
     case 'REMOVE_ITEM_QUANTITY':
-      const stateWithoutItem = state.filter(item => item.id !== action.payload.id)
-      const item = state.find(item => item.id === action.payload.id)
+      const stateWithoutItem = state.filter(
+        (item) => item.id !== action.payload.id
+      )
+      const item = state.find((currentItem) => (
+        currentItem.id === action.payload.id
+      ))
 
       if (!item) {
         return state
@@ -75,6 +85,8 @@ const cartReducer = (state: CartItem[], action: CartAction): CartItem[] => {
       }
 
       return [...stateWithoutItem, { ...item, quantity: item.quantity - 1 }]
+    case 'CLEAR_CART':
+      return []
     default:
       throw new Error('Invalid action type')
   }
@@ -95,18 +107,19 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: 'REMOVE_ITEM_QUANTITY', payload: { id } })
   }
 
+  const clearCart = () => {
+    dispatch({ type: 'CLEAR_CART' })
+  }
+
   const cart: Cart = {
     items,
     addItem,
     removeItem,
     removeQuantity,
-  };
+    clearCart,
+  }
 
-  return (
-    <CartContext.Provider value={cart}>
-      { children }
-    </CartContext.Provider>
-  )
+  return <CartContext.Provider value={cart}>{children}</CartContext.Provider>
 }
 
 export const useCart = () => {

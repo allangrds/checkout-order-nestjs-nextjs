@@ -1,8 +1,9 @@
-import * as S from './styles'
+import * as S from './button.styles'
 
 type Props = {
   colorScheme?: 'green' | 'gray'
   children: React.ReactNode
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   css?: any
   fullWidth?: boolean
   onClick: () => void
@@ -10,8 +11,8 @@ type Props = {
 }
 
 export const Button = ({
-  colorScheme,
   children,
+  colorScheme,
   css,
   fullWidth,
   onClick,
@@ -24,6 +25,6 @@ export const Button = ({
     variant={variant}
     css={css}
   >
-    { children }
+    {children}
   </S.Button>
 )

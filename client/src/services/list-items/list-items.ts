@@ -1,6 +1,6 @@
-import { ItemsResponse } from '@/types'
+import { Api, ItemsResponse } from '@/types'
 
-export const listItems = (api: any): Promise<ItemsResponse> => {
+export const listItems = (api: Api): Promise<ItemsResponse> => {
   const endpoint = 'items'
 
   return api.get(endpoint)

@@ -15,6 +15,8 @@
 
 ### Client
 
+1. Copy the file `.env.local.example` to `.env.local`;
+1. If you don't wanna to mock the api, change `NEXT_PUBLIC_MOCK_API` to `false`
 1. Run `client-up`;
 2. Access `localhost:3000`.
 

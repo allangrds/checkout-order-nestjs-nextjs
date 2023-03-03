@@ -1,4 +1,4 @@
-type Categories = {
+export type Categories = {
   id: number
   image_id: string
   name: string

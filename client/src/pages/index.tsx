@@ -4,13 +4,27 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import { Button, Card, Cart, Container } from '@/components'
-import { useCart, useItems } from '@/hooks'
+import { useCart, useCategories, useItems } from '@/hooks'
 import * as S from '@/styles/home.styles'
-import { Item } from '@/types'
+import { Categories, Item } from '@/types'
 import { moneyFormat } from '@/utils'
+
+const findCategory = (categories: Categories[], categoryId: number) => {
+  const choosedCategory = categories.find((category: Categories) => (
+    category.id === categoryId
+  ))
+
+  return choosedCategory
+}
 
 const Home = () => {
   const router = useRouter()
+  const {
+    categories,
+    error: errorCategories,
+    listCategories,
+    loading: loadingCategories,
+  } = useCategories()
   const {
     error: errorItems,
     items,
@@ -21,6 +35,7 @@ const Home = () => {
   const { t } = useTranslation()
 
   React.useEffect(() => {
+    listCategories()
     listItems()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -38,8 +53,8 @@ const Home = () => {
 
   const handleCheckout = () => router.push('/checkout')
 
-  const isLoading = loadingItems
-  const hasError = errorItems
+  const isLoading = loadingItems || loadingCategories
+  const hasError = errorItems || errorCategories
 
   return (
     <>
@@ -66,6 +81,7 @@ const Home = () => {
           {items.map((item) => (
             <Card key={item.id}>
               <S.ItemName>{item.name}</S.ItemName>
+              <p>{findCategory(categories, item.category_id)?.name}</p>
               <p>{moneyFormat(item.price)}</p>
               <Button
                 fullWidth

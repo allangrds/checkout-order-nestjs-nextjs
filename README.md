@@ -17,17 +17,17 @@
 
 1. Copy the file `.env.local.example` to `.env.local`;
 1. If you don't wanna to mock the api, change `NEXT_PUBLIC_MOCK_API` to `false`
-1. Run `client-up`;
+1. Run `make client-up`;
 2. Access `localhost:3000`.
 
 ### API
 
-1. Run `api-up`;
+1. Run `make api-up`;
 2. Access `localhost:3001`.
 
 ### API Docs
 
-1. Run `docs-up`;
+1. Run `make docs-up`;
 2. Access `localhost:3006`.
 
 ## Technologies

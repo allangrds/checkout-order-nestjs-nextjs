@@ -34,9 +34,9 @@
 
 - Client
   - NextJS 13.1.6
-  - MSW(for api mocking)
-  - Stitches + Radix UI(for style)
-  - React hook form + zod(for form management and validation)
+  - MSW(api mocking)
+  - Stitches + Radix UI(style)
+  - React hook form + zod(form management and validation)
 - API
   - NestJS 9.0.0
 - Docs

@@ -14,15 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
   return (
     <S.Fieldset>
       <S.Input {...rest} hasError={Boolean(error)} ref={ref} />
-      {
-        error
-          ? (
-            <S.ErrorMessage>
-              {error}
-            </S.ErrorMessage>
-          )
-          : undefined
-      }
+      {error ? <S.ErrorMessage>{error}</S.ErrorMessage> : undefined}
     </S.Fieldset>
   )
 })

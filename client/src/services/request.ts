@@ -45,10 +45,10 @@ const get = (endpoint: string, options?: http.RequestOptions) => {
   return requester(endpoint, newOptions)
 }
 
-const post = (endpoint: string, options: http.RequestOptions) => {
+const post = (endpoint: string, body: string) => {
   const newOptions = {
-    ...options,
     method: 'POST',
+    body,
   }
 
   return requester(endpoint, newOptions)

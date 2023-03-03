@@ -12,6 +12,6 @@ export const isValidCreditCardExpirationAt = (value: string) => {
     month >= 1 &&
     month <= 12 &&
     year >= currentYear &&
-    month >= currentMonth
+    ((month >= currentMonth && year === currentYear) || year > currentYear)
   )
 }

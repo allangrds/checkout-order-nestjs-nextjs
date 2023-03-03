@@ -2,7 +2,7 @@ import { z as zod } from 'zod'
 
 import { useForm as useBaseForm } from '@/hooks'
 import { OrdersRequest } from '@/types'
-import { isValidCreditCardNumber, isValidCreditCardExpirationAt } from '@/utils'
+import { isValidCreditCardExpirationAt, isValidCreditCardNumber } from '@/utils'
 
 export const useForm = () => {
   const formRequiredMessage = 'This field is required'

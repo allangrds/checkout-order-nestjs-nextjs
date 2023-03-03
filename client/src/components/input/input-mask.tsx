@@ -14,26 +14,14 @@ type Props = {
   placeholder: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const InputMask = React.forwardRef<any, Props>((props, ref) => {
   const { error, mask, ...rest } = props
 
   return (
     <S.Fieldset>
-      <S.InputMask
-        mask={mask}
-        hasError={Boolean(error)}
-        ref={ref}
-        {...rest}
-      />
-      {
-        error
-          ? (
-            <S.ErrorMessage>
-              {error}
-            </S.ErrorMessage>
-          )
-          : undefined
-      }
+      <S.InputMask mask={mask} hasError={Boolean(error)} ref={ref} {...rest} />
+      {error ? <S.ErrorMessage>{error}</S.ErrorMessage> : undefined}
     </S.Fieldset>
   )
 })
@@ -41,4 +29,3 @@ const InputMask = React.forwardRef<any, Props>((props, ref) => {
 InputMask.displayName = 'InputMask'
 
 export { InputMask }
-

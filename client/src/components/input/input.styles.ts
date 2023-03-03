@@ -24,7 +24,7 @@ export const Input = styled('input', {
         borderColor: '$red9',
       },
     },
-  }
+  },
 })
 
 export const InputMask = styled(BaseInputMask, {
@@ -43,7 +43,7 @@ export const InputMask = styled(BaseInputMask, {
         borderColor: '$red9',
       },
     },
-  }
+  },
 })
 
 export const ErrorMessage = styled('p', {

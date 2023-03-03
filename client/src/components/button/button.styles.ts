@@ -12,7 +12,8 @@ export const Button = styled('button', {
   outline: 'transparent solid 2px',
   outlineOffset: '2px',
   position: 'relative',
-  transitionProperty: 'background-color,border-color,color,fill,stroke,opacity,box-shadow,transform',
+  transitionProperty:
+    'background-color,border-color,color,fill,stroke,opacity,box-shadow,transform',
   transitionDuration: '200ms',
   userSelect: 'none',
   verticalAlign: 'middle',

@@ -1,8 +1,5 @@
 import Head from 'next/head'
 
-import { Button } from '../button'
-import { Container } from '../container'
-
 type Props = {
   children: React.ReactNode
 }
@@ -17,8 +14,6 @@ export const Layout = ({ children }: Props) => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <main>
-      { children }
-    </main>
+    <main>{children}</main>
   </>
 )

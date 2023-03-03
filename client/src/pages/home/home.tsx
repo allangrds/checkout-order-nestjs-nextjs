@@ -3,32 +3,25 @@ import * as React from 'react'
 import { useRouter } from 'next/router'
 
 import { Button, Card, Cart, Container } from '@/components'
-import { useCategories, useItems, useCart } from '@/hooks'
-import { moneyFormat } from '@/utils'
+import { useCart, useItems } from '@/hooks'
 import { Item } from '@/types'
+import { moneyFormat } from '@/utils'
 
 import * as S from './home.styles'
 
 export const Home = () => {
   const router = useRouter()
   const {
-    categories,
-    loading: loadingCategories,
-    error: errorCategories,
-    listCategories
-  } = useCategories()
-  const {
-    items,
-    loading: loadingItems,
     error: errorItems,
-    listItems
+    items,
+    listItems,
+    loading: loadingItems,
   } = useItems()
   const { addItem, items: cartItems, removeItem } = useCart()
 
   React.useEffect(() => {
-    listCategories()
     listItems()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleAddItem = (item: Item) => {
@@ -44,8 +37,8 @@ export const Home = () => {
 
   const handleCheckout = () => router.push('/checkout')
 
-  const isLoading = loadingCategories || loadingItems
-  const hasError = errorCategories || errorItems
+  const isLoading = loadingItems
+  const hasError = errorItems
 
   return (
     <>
@@ -62,46 +55,30 @@ export const Home = () => {
       </S.Header>
       <Container>
         <S.Showcase>
-          {
-            isLoading ? (
-              <p>
-                Loading...
-              </p>
-            ) : undefined
-          }
-          {
-            !isLoading && hasError ? (
-              <p>
-                Error on retrieve items. Try again later.
-              </p>
-            ) : undefined
-          }
-          {
-            !isLoading && !hasError && items.length === 0 ? (
-              <p>
-                No items found.
-              </p>
-            ) : undefined
-          }
-          {
-            items.map(item => (
-              <Card key={item.id}>
-                <S.ItemName>{item.name}</S.ItemName>
-                <p>{moneyFormat(item.price)}</p>
-                <Button
-                  fullWidth
-                  colorScheme="green"
-                  variant="outline"
-                  onClick={() => handleAddItem(item)}
-                  css={{
-                    marginTop: '$4'
-                  }}
-                >
-                  Add to cart
-                </Button>
-              </Card>
-            ))
-          }
+          {isLoading ? <p>Loading...</p> : undefined}
+          {!isLoading && hasError ? (
+            <p>Error on retrieve items. Try again later.</p>
+          ) : undefined}
+          {!isLoading && !hasError && items.length === 0 ? (
+            <p>No items found.</p>
+          ) : undefined}
+          {items.map((item) => (
+            <Card key={item.id}>
+              <S.ItemName>{item.name}</S.ItemName>
+              <p>{moneyFormat(item.price)}</p>
+              <Button
+                fullWidth
+                colorScheme="green"
+                variant="outline"
+                onClick={() => handleAddItem(item)}
+                css={{
+                  marginTop: '$4',
+                }}
+              >
+                Add to cart
+              </Button>
+            </Card>
+          ))}
         </S.Showcase>
       </Container>
     </>

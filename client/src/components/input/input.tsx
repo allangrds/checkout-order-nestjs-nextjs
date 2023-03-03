@@ -6,6 +6,8 @@ type Props = {
   type: string
   placeholder: string
   error?: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  name: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {

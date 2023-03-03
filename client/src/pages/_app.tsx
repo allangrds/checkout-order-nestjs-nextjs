@@ -7,6 +7,8 @@ import { variables } from '@/config'
 import { ApiProvider, CartProvider } from '@/hooks'
 import { injectGlobalStyles } from '@/theme'
 
+import '@/lib/i18n'
+
 injectGlobalStyles()
 
 const API_MOCKING = variables.MOCK_API === 'true'

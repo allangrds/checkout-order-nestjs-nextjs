@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { useRouter } from 'next/router'
 import { Controller } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Container, Input, InputMask } from '@/components'
 import { useCart, useOrders } from '@/hooks'
@@ -19,6 +20,7 @@ const Checkout = () => {
     register,
   } = useForm()
   const { createOrder, error, loading: loadingCreateOrder } = useOrders()
+  const { t } = useTranslation()
 
   React.useEffect(() => {
     if (!cartItems.length) {
@@ -49,9 +51,9 @@ const Checkout = () => {
             alignSelf: 'flex-start !important',
           }}
         >
-          Go back
+          { t('pages.checkout.go-back') }
         </Button>
-        {loadingCreateOrder ? <p>Loading...</p> : undefined}
+        {loadingCreateOrder ? <p>{ t('pages.checkout.loading') }</p> : undefined}
         {error ? <p>{error}</p> : undefined}
         {!loadingCreateOrder ? (
           <S.Form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -68,7 +70,7 @@ const Checkout = () => {
                     alwaysShowMask={false}
                     maskPlaceholder=""
                     type="text"
-                    placeholder="Card number"
+                    placeholder={ t('pages.checkout.form.card-number') }
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
@@ -79,7 +81,7 @@ const Checkout = () => {
               />
               <Input
                 type="text"
-                placeholder="Holder name"
+                placeholder={ t('pages.checkout.form.card-holder-name') }
                 error={errors.card_holder_name?.message}
                 {...register('card_holder_name')}
               />
@@ -95,7 +97,7 @@ const Checkout = () => {
                     alwaysShowMask={false}
                     maskPlaceholder=""
                     type="text"
-                    placeholder="CVV"
+                    placeholder={ t('pages.checkout.form.card-cvv') }
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
@@ -116,7 +118,7 @@ const Checkout = () => {
                     alwaysShowMask={false}
                     maskPlaceholder=""
                     type="text"
-                    placeholder="Expiration at"
+                    placeholder={ t('pages.checkout.form.card-expiration-at') }
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
@@ -127,7 +129,7 @@ const Checkout = () => {
               />
             </S.Section>
             <Button colorScheme="green" variant="solid" fullWidth type="submit">
-              Pay it
+              { t('pages.checkout.pay-it') }
             </Button>
           </S.Form>
         ) : undefined}

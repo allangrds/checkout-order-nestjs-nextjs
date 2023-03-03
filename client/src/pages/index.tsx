@@ -1,13 +1,13 @@
 import * as React from 'react'
 
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Card, Cart, Container } from '@/components'
 import { useCart, useItems } from '@/hooks'
 import * as S from '@/styles/home.styles'
 import { Item } from '@/types'
 import { moneyFormat } from '@/utils'
-
 
 const Home = () => {
   const router = useRouter()
@@ -18,6 +18,7 @@ const Home = () => {
     loading: loadingItems,
   } = useItems()
   const { addItem, items: cartItems, removeItem } = useCart()
+  const { t } = useTranslation()
 
   React.useEffect(() => {
     listItems()
@@ -55,12 +56,12 @@ const Home = () => {
       </S.Header>
       <Container>
         <S.Showcase>
-          {isLoading ? <p>Loading...</p> : undefined}
+          {isLoading ? <p>{ t('pages.home.loading') }</p> : undefined}
           {!isLoading && hasError ? (
-            <p>Error on retrieve items. Try again later.</p>
+            <p>{ t('pages.home.error') }</p>
           ) : undefined}
           {!isLoading && !hasError && items.length === 0 ? (
-            <p>No items found.</p>
+            <p>{ t('pages.home.empty') }</p>
           ) : undefined}
           {items.map((item) => (
             <Card key={item.id}>
@@ -75,7 +76,7 @@ const Home = () => {
                   marginTop: '$4',
                 }}
               >
-                Add to cart
+                { t('pages.home.items.add-to-cart') }
               </Button>
             </Card>
           ))}

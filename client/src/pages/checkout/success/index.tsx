@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
 
 import { Button, Container } from '@/components'
+import * as S from '@/styles/checkout-success.styles'
 
-import * as S from './success.styles'
-
-export const CheckoutSuccess = () => {
+const CheckoutSuccess = () => {
   const router = useRouter()
 
   const handleOnGoBack = () => router.replace('/')
@@ -25,3 +24,5 @@ export const CheckoutSuccess = () => {
     </Container>
   )
 }
+
+export default CheckoutSuccess

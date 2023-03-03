@@ -4,10 +4,15 @@ import { render, renderHook } from '@testing-library/react'
 
 import { ApiProvider, useApiContext } from './use-api-context'
 
+const fakeApi = {
+  get: jest.fn(),
+  post: jest.fn(),
+}
+
 describe('ApiProvider', () => {
   it('should render correcly', () => {
     const { getByText } = render(
-      <ApiProvider>
+      <ApiProvider api={fakeApi}>
         <p>hello world</p>
       </ApiProvider>
     )
@@ -19,7 +24,7 @@ describe('ApiProvider', () => {
 describe('useApiContext', () => {
   it('should provide the API context', () => {
     const { result } = renderHook(() => useApiContext(), {
-      wrapper: ({ children }) => <ApiProvider>{children}</ApiProvider>,
+      wrapper: ({ children }) => <ApiProvider api={fakeApi}>{children}</ApiProvider>,
     })
 
     expect(result.current.api).toBeDefined()

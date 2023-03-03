@@ -1,4 +1,4 @@
-{
+module.exports = {
   "env": {
     "browser": true,
     "es2021": true,
@@ -22,7 +22,7 @@
     "ecmaVersion": "latest",
     "project": "./tsconfig.json",
     "sourceType": "module",
-    "tsconfigRootDir": "."
+    tsconfigRootDir: __dirname,
   },
   "rules": {
     "@typescript-eslint/no-var-requires": "off",

@@ -5,11 +5,24 @@ services:
     container_name: api
     command: 'npm run start:dev'
     build: .
+    env_file:
+      - .env
     volumes:
       - .:/usr/app
     ports:
       - 3001:3001
     restart: on-failure
+    depends_on:
+      - database_postgres
+  database_postgres:
+    image: postgres:14.5-alpine
+    container_name: database_postgres
+    hostname: postgres
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    env_file:
+      - .env
+    restart: unless-stopped
   docs:
     container_name: docs
     command: 'npm run docs:preview'

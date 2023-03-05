@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(70)
+  imageId   String   @map("image_id") @db.VarChar(160)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Item      Item[]
+
+  @@map("categories")
+}
+
+model Item {
+  id         Int         @id @default(autoincrement())
+  imageId    String      @map("image_id") @db.VarChar(70)
+  name       String      @db.VarChar(70)
+  price      Int
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+  categoryId Int         @map("category_id")
+  category   Category    @relation(fields: [categoryId], references: [id])
+  orders     Order[]     @relation("OrderItem")
+  OrderItem  OrderItem[]
+
+  @@map("items")
+}
+
+model Order {
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  creditCardNumber String   @map("credit_card_number") @db.VarChar(16)
+  cardHolderName   String   @map("card_holder_name") @db.VarChar(70)
+  cvv              String   @db.VarChar(3)
+  totalItems       Int      @map("total_items")
+  totalAmount      Int      @map("total_amount")
+
+  items     Item[]      @relation("OrderItem")
+  OrderItem OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id       Int   @id @default(autoincrement())
+  orderId  Int   @map("order_id")
+  itemId   Int   @map("item_id")
+  quantity Int
+  order    Order @relation(fields: [orderId], references: [id])
+  item     Item  @relation(fields: [itemId], references: [id])
+
+  @@map("orders_items")
+}

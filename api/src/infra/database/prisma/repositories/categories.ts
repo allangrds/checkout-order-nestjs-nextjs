@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { CategoriesRepository } from '@app/repositories/categories';
 import { CategoryPropsSnakeCase } from '@app/entities';
 import { PrismaService } from '../prisma.service';
-import { PrismaCategoryMapper } from '../mappers/categories';
+import { PrismaCategoryMapper } from '../mappers';
 
 @Injectable()
 export class PrismaCategoriesRepository implements CategoriesRepository {

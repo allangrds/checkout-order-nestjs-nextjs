@@ -1,4 +1,4 @@
-import { InMemoryCategoriesRepository } from '../../../../test/repositories/in-memory-categories';
+import { InMemoryCategoriesRepository } from '../../../../test/repositories';
 import { GetCategories } from './get-categories';
 
 describe('GetCategories', () => {

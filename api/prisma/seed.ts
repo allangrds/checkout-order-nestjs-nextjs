@@ -26,7 +26,7 @@ async function main() {
         id: 1,
         imageId: '293202f9d9f7f4',
         name: 'Bagel',
-        price: 2.0,
+        price: 200,
       },
       {
         categoryId: 1,

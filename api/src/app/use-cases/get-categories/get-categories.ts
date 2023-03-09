@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CategoriesRepository } from '../../repositories/categories';
+import { CategoriesRepository } from '../../repositories';
 
 type GetCategoriesResponse = {
   id: number;

@@ -1,0 +1,46 @@
+# This is a basic workflow to help you get started with Actions
+
+name: API CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - api/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '16' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: cd api && npm ci
+    - name: Build project
+      run: cd api && ls && npm run build
+  eslint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '16' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: cd api && npm ci
+    - name: Run ESLint
+      run: cd api && ls && npm run eslint
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '16' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: cd api && npm ci
+    - name: Run ESLint
+      run: cd api && npm run test

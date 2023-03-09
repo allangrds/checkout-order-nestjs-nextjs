@@ -1,5 +1,7 @@
 # Checkout Order - Nestjs + Nextjs
 
+This is a simple project where the application will return a list of fictitious items, the user will be able to insert these items in the cart (which will disappear when pressing f5), update the cart items, go to a payment screen, fill in the data and create the request.
+
 ## Table of content
 
 - [Requeriments](#requeriments)

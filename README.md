@@ -1,4 +1,4 @@
-# Mashgin Fullstack Test
+# Checkout Order - Nestjs + Nextjs
 
 ## Table of content
 

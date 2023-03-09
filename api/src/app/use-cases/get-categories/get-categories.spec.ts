@@ -9,18 +9,18 @@ describe('GetCategories', () => {
 
     expect(categories).toEqual([
       {
-        id: 1,
-        name: 'Bakery',
-        image_id: 'f3fbf57b118fa9',
-        created_at: new Date('2023-03-08T16:49:26.177Z'),
-        updated_at: new Date('2023-03-08T16:49:26.177Z'),
+        _id: 1,
+        _name: 'Bakery',
+        _imageId: 'f3fbf57b118fa9',
+        _createdAt: new Date('2023-03-08T16:49:26.177Z'),
+        _updatedAt: new Date('2023-03-08T16:49:26.177Z'),
       },
       {
-        id: 2,
-        name: 'Entrees',
-        image_id: 'b271afbefdc554',
-        created_at: new Date('2023-03-08T16:49:26.177Z'),
-        updated_at: new Date('2023-03-08T16:49:26.177Z'),
+        _id: 2,
+        _name: 'Entrees',
+        _imageId: 'b271afbefdc554',
+        _createdAt: new Date('2023-03-08T16:49:26.177Z'),
+        _updatedAt: new Date('2023-03-08T16:49:26.177Z'),
       },
     ]);
   });

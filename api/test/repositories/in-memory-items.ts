@@ -1,5 +1,5 @@
 import { ItemsRepository } from '../../src/app/repositories';
-import { Item, ItemPropsSnakeCase } from '../../src/app/entities';
+import { Item, ItemProps } from '../../src/app/entities';
 
 export class InMemoryItemsRepository implements ItemsRepository {
   public items: Item[] = [];
@@ -27,7 +27,21 @@ export class InMemoryItemsRepository implements ItemsRepository {
     ];
   }
 
-  async list(): Promise<ItemPropsSnakeCase[]> {
-    return this.items.map((item) => item.toJSON());
+  async list(): Promise<ItemProps[]> {
+    return this.items.map((item) => item);
+  }
+
+  async findManyByIds(ids: number[]): Promise<ItemProps[]> {
+    return [
+      {
+        id: 1,
+        name: 'Bakery',
+        imageId: 'f3fbf57b118fa9',
+        categoryId: 1,
+        price: 199,
+        createdAt: new Date('2023-03-08T16:49:26.177Z'),
+        updatedAt: new Date('2023-03-08T16:49:26.177Z'),
+      },
+    ];
   }
 }

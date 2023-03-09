@@ -10,8 +10,8 @@ describe('Item', () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    const category = new Item(props);
+    const item = new Item(props);
 
-    expect(category).toBeTruthy();
+    expect(item).toBeTruthy();
   });
 });

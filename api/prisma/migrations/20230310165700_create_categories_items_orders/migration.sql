@@ -28,8 +28,9 @@ CREATE TABLE "orders" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "credit_card_number" VARCHAR(16) NOT NULL,
-    "card_holder_name" VARCHAR(70) NOT NULL,
-    "cvv" VARCHAR(3) NOT NULL,
+    "credit_card_holder_name" VARCHAR(70) NOT NULL,
+    "credit_card_cvv" VARCHAR(3) NOT NULL,
+    "credit_card_expiration_at" VARCHAR(4) NOT NULL,
     "total_items" INTEGER NOT NULL,
     "total_amount" INTEGER NOT NULL,
 
@@ -42,6 +43,10 @@ CREATE TABLE "orders_items" (
     "order_id" INTEGER NOT NULL,
     "item_id" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
+    "unitary_price" INTEGER NOT NULL,
+    "total_price" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "orders_items_pkey" PRIMARY KEY ("id")
 );

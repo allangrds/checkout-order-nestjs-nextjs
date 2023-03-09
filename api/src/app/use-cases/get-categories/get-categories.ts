@@ -1,14 +1,9 @@
 import { Injectable } from '@nestjs/common';
+
+import { CategoryProps } from '@app/entities';
 import { CategoriesRepository } from '../../repositories';
 
-type GetCategoriesResponse = {
-  id: number;
-  name: string;
-  image_id: string;
-  created_at: Date;
-  updated_at: Date;
-};
-
+type GetCategoriesResponse = CategoryProps;
 @Injectable()
 export class GetCategories {
   constructor(private categoriesRepository: CategoriesRepository) {}

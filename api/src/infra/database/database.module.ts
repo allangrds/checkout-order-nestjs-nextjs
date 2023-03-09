@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
 
-import { CategoriesRepository, ItemsRepository } from '../../app/repositories';
-
 import { PrismaService } from './prisma/prisma.service';
+import {
+  CategoriesRepository,
+  ItemsRepository,
+  OrdersItemsRepository,
+  OrdersRepository,
+} from '../../app/repositories';
+
 import {
   PrismaCategoriesRepository,
   PrismaItemsRepository,
+  PrismaOrdersRepository,
+  PrismaOrdersItemsRepository,
 } from './prisma/repositories';
 
 @Module({
@@ -19,7 +26,20 @@ import {
       provide: ItemsRepository,
       useClass: PrismaItemsRepository,
     },
+    {
+      provide: OrdersRepository,
+      useClass: PrismaOrdersRepository,
+    },
+    {
+      provide: OrdersItemsRepository,
+      useClass: PrismaOrdersItemsRepository,
+    },
   ],
-  exports: [CategoriesRepository, ItemsRepository],
+  exports: [
+    CategoriesRepository,
+    ItemsRepository,
+    OrdersRepository,
+    OrdersItemsRepository,
+  ],
 })
 export class DatabaseModule {}

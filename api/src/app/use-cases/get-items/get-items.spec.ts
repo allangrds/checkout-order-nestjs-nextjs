@@ -9,22 +9,22 @@ describe('GetItems', () => {
 
     expect(items).toEqual([
       {
-        id: 1,
-        name: 'Bakery',
-        image_id: 'f3fbf57b118fa9',
-        category_id: 1,
-        price: 199,
-        created_at: new Date('2023-03-08T16:49:26.177Z'),
-        updated_at: new Date('2023-03-08T16:49:26.177Z'),
+        _id: 1,
+        _name: 'Bakery',
+        _imageId: 'f3fbf57b118fa9',
+        _categoryId: 1,
+        _price: 199,
+        _createdAt: new Date('2023-03-08T16:49:26.177Z'),
+        _updatedAt: new Date('2023-03-08T16:49:26.177Z'),
       },
       {
-        id: 2,
-        name: 'Entrees',
-        image_id: 'b271afbefdc554',
-        category_id: 2,
-        price: 299,
-        created_at: new Date('2023-03-08T16:49:26.177Z'),
-        updated_at: new Date('2023-03-08T16:49:26.177Z'),
+        _id: 2,
+        _name: 'Entrees',
+        _imageId: 'b271afbefdc554',
+        _categoryId: 2,
+        _price: 299,
+        _createdAt: new Date('2023-03-08T16:49:26.177Z'),
+        _updatedAt: new Date('2023-03-08T16:49:26.177Z'),
       },
     ]);
   });

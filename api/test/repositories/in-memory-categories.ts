@@ -1,5 +1,5 @@
 import { CategoriesRepository } from '../../src/app/repositories/categories';
-import { Category, CategoryPropsSnakeCase } from '../../src/app/entities';
+import { Category, CategoryProps } from '../../src/app/entities';
 
 export class InMemoryCategoriesRepository implements CategoriesRepository {
   public categories: Category[] = [];
@@ -23,7 +23,7 @@ export class InMemoryCategoriesRepository implements CategoriesRepository {
     ];
   }
 
-  async list(): Promise<CategoryPropsSnakeCase[]> {
-    return this.categories.map((category) => category.toJSON());
+  async list(): Promise<CategoryProps[]> {
+    return this.categories.map((category) => category);
   }
 }

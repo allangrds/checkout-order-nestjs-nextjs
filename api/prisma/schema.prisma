@@ -37,14 +37,15 @@ model Item {
 }
 
 model Order {
-  id               Int      @id @default(autoincrement())
-  createdAt        DateTime @default(now()) @map("created_at")
-  updatedAt        DateTime @updatedAt @map("updated_at")
-  creditCardNumber String   @map("credit_card_number") @db.VarChar(16)
-  cardHolderName   String   @map("card_holder_name") @db.VarChar(70)
-  cvv              String   @db.VarChar(3)
-  totalItems       Int      @map("total_items")
-  totalAmount      Int      @map("total_amount")
+  id                     Int      @id @default(autoincrement())
+  createdAt              DateTime @default(now()) @map("created_at")
+  updatedAt              DateTime @updatedAt @map("updated_at")
+  creditCardNumber       String   @map("credit_card_number") @db.VarChar(16)
+  creditCardHolderName   String   @map("credit_card_holder_name") @db.VarChar(70)
+  creditCardCvv          String   @map("credit_card_cvv") @db.VarChar(3)
+  creditCardExpirationAt String   @map("credit_card_expiration_at") @db.VarChar(4)
+  totalItems             Int      @map("total_items")
+  totalPrice             Int      @map("total_amount")
 
   items     Item[]      @relation("OrderItem")
   OrderItem OrderItem[]
@@ -53,12 +54,16 @@ model Order {
 }
 
 model OrderItem {
-  id       Int   @id @default(autoincrement())
-  orderId  Int   @map("order_id")
-  itemId   Int   @map("item_id")
-  quantity Int
-  order    Order @relation(fields: [orderId], references: [id])
-  item     Item  @relation(fields: [itemId], references: [id])
+  id           Int      @id @default(autoincrement())
+  orderId      Int      @map("order_id")
+  itemId       Int      @map("item_id")
+  quantity     Int
+  unitaryPrice Int      @map("unitary_price")
+  totalPrice   Int      @map("total_price")
+  order        Order    @relation(fields: [orderId], references: [id])
+  item         Item     @relation(fields: [itemId], references: [id])
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
 
   @@map("orders_items")
 }

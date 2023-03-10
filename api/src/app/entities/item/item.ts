@@ -1,4 +1,4 @@
-import { CamelCaseToSnakeCase, Replace } from 'src/helpers';
+import { Replace } from 'src/helpers';
 
 export type ItemProps = {
   id: number;
@@ -8,10 +8,6 @@ export type ItemProps = {
   imageId: string;
   createdAt: Date;
   updatedAt: Date;
-};
-
-export type ItemPropsSnakeCase = {
-  [K in keyof ItemProps as CamelCaseToSnakeCase<string & K>]: ItemProps[K];
 };
 
 export class Item {
@@ -68,17 +64,5 @@ export class Item {
 
   public get price(): number {
     return this._price;
-  }
-
-  public toJSON(): ItemPropsSnakeCase {
-    return {
-      id: this.id,
-      name: this.name,
-      image_id: this.imageId,
-      category_id: this.categoryId,
-      price: this.price,
-      created_at: this.createdAt,
-      updated_at: this.updatedAt,
-    };
   }
 }

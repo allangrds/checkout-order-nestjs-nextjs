@@ -1,4 +1,4 @@
-import { CamelCaseToSnakeCase, Replace } from 'src/helpers';
+import { Replace } from 'src/helpers';
 
 export type CategoryProps = {
   id: number;
@@ -6,12 +6,6 @@ export type CategoryProps = {
   imageId: string;
   createdAt: Date;
   updatedAt: Date;
-};
-
-export type CategoryPropsSnakeCase = {
-  [K in keyof CategoryProps as CamelCaseToSnakeCase<
-    string & K
-  >]: CategoryProps[K];
 };
 
 export class Category {
@@ -56,15 +50,5 @@ export class Category {
 
   public get updatedAt(): Date {
     return this._updatedAt;
-  }
-
-  public toJSON(): CategoryPropsSnakeCase {
-    return {
-      id: this.id,
-      name: this.name,
-      image_id: this.imageId,
-      created_at: this.createdAt,
-      updated_at: this.updatedAt,
-    };
   }
 }

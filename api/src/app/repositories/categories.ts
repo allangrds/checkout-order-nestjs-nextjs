@@ -1,5 +1,5 @@
-import { CategoryPropsSnakeCase } from '../entities';
+import { CategoryProps } from '../entities';
 
 export abstract class CategoriesRepository {
-  abstract list(): Promise<CategoryPropsSnakeCase[]>;
+  abstract list(): Promise<CategoryProps[]>;
 }

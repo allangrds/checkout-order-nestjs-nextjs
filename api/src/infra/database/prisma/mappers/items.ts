@@ -1,8 +1,8 @@
 import { Item as RawItem } from '@prisma/client';
-import { Item, ItemPropsSnakeCase } from '@app/entities';
+import { Item, ItemProps } from '@app/entities';
 
 export class PrismaItemMapper {
-  static toDomain(prismaCategory: RawItem): ItemPropsSnakeCase {
+  static toDomain(prismaCategory: RawItem): ItemProps {
     const item = new Item({
       id: prismaCategory.id,
       name: prismaCategory.name,
@@ -13,6 +13,6 @@ export class PrismaItemMapper {
       updatedAt: prismaCategory.updatedAt,
     });
 
-    return item.toJSON();
+    return item;
   }
 }

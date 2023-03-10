@@ -1,8 +1,8 @@
 import { Category as RawCategory } from '@prisma/client';
-import { Category, CategoryPropsSnakeCase } from '@app/entities';
+import { Category, CategoryProps } from '@app/entities';
 
 export class PrismaCategoryMapper {
-  static toDomain(prismaCategory: RawCategory): CategoryPropsSnakeCase {
+  static toDomain(prismaCategory: RawCategory): CategoryProps {
     const category = new Category({
       id: prismaCategory.id,
       name: prismaCategory.name,
@@ -11,6 +11,6 @@ export class PrismaCategoryMapper {
       updatedAt: prismaCategory.updatedAt,
     });
 
-    return category.toJSON();
+    return category;
   }
 }

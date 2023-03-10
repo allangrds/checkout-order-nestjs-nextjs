@@ -14,10 +14,10 @@ describe('services', () => {
   describe('createOrder', () => {
     it('should call the endpoint and return data', async () => {
       const mockRequest = {
-        card_cvv: '123',
-        card_expiration_at: '10/23',
-        card_holder_name: 'Joao S Silva',
-        card_number: '4111111111111111',
+        credit_card_cvv: '123',
+        credit_card_expiration_at: '10/23',
+        credit_card_holder_name: 'Joao S Silva',
+        credit_card_number: '4111111111111111',
       }
       const expectedEndpoint = 'orders'
       const response = await createOrder(mockApi, mockRequest)

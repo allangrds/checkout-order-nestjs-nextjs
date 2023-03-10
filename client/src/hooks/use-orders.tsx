@@ -20,9 +20,11 @@ export const useOrders = () => {
 
         return res
       })
-      .catch((err) => {
-        setError(err.message)
+      .catch(async (err) => {
+        setError('Your order could not be created. Please try again later.')
         setLoading(false)
+
+        throw err
       })
   }
 

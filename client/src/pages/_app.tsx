@@ -8,8 +8,6 @@ import { ApiProvider, CartProvider } from '@/hooks'
 import { request } from '@/services/request'
 import { injectGlobalStyles } from '@/theme'
 
-import '@/lib/i18n'
-
 injectGlobalStyles()
 
 const API_MOCKING = variables.MOCK_API === 'true'
@@ -38,7 +36,9 @@ export default function App ({ Component, pageProps }: AppProps) {
     <ApiProvider api={api}>
       <CartProvider>
         <Layout>
-          <Component {...pageProps} />
+          <React.Suspense fallback={<p>Loading...</p>}>
+            <Component {...pageProps} />
+          </React.Suspense>
         </Layout>
       </CartProvider>
     </ApiProvider>

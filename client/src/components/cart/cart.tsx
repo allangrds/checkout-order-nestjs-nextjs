@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import { useTranslation } from 'react-i18next'
-
 import { CartItem } from '@/types'
 import { moneyFormat } from '@/utils'
 
@@ -20,7 +18,6 @@ export const Cart = ({
   onClickCheckout,
   onClickRemoveItem,
 }: Props) => {
-  const { t } = useTranslation()
   const [isOpen, setIsOpen] = React.useState(false)
   const itemsOnCart = items.reduce((acc, item) => acc + item.quantity, 0)
   const totalPrice = items.reduce(
@@ -35,7 +32,7 @@ export const Cart = ({
         variant="outline"
         onClick={() => setIsOpen(!isOpen)}
       >
-        { t('pages.cart.title') } ({itemsOnCart})
+        Cart ({itemsOnCart})
       </Button>
       {isOpen ? (
         <S.Cart>
@@ -43,7 +40,7 @@ export const Cart = ({
           {items.length > 0 ? (
             <>
               <S.CartTotalPrice>
-                { t('pages.cart.total-price') } {moneyFormat(totalPrice)}
+                Total price: {moneyFormat(totalPrice)}
               </S.CartTotalPrice>
               <Button
                 variant="solid"
@@ -54,16 +51,16 @@ export const Cart = ({
                   marginBottom: '$6',
                 }}
               >
-                { t('pages.cart.checkout') }
+                Checkout
               </Button>
             </>
           ) : undefined}
           {items.map((item) => (
             <S.CartItem key={item.id}>
               <S.ItemName>{item.name}</S.ItemName>
-              <S.ItemNormalText>{ t('pages.cart.quantity') } {item.quantity}</S.ItemNormalText>
+              <S.ItemNormalText>Quantity {item.quantity}</S.ItemNormalText>
               <S.ItemNormalText>
-                { t('pages.cart.price') }: {moneyFormat(item.unitary_price * item.quantity)}
+                Price: {moneyFormat(item.unitary_price * item.quantity)}
               </S.ItemNormalText>
               <Button
                 variant="outline"
@@ -72,7 +69,7 @@ export const Cart = ({
                   marginTop: '$4',
                 }}
               >
-                { t('pages.cart.remove') }
+                Remove
               </Button>
             </S.CartItem>
           ))}

@@ -1,13 +1,12 @@
-import * as http from 'http'
-
 class FetchError extends Error {
-  constructor (public res: Response, message?: string) {
+  constructor (public res: Response, public body: any, message?: string) {
     super(message)
+    this.body = body
   }
 }
 
 export const request = (baseUrl: string) => {
-  const requester = (endpoint: string, options?: http.RequestOptions) => {
+  const requester = (endpoint: string, options?: RequestInit) => {
     const url = `${baseUrl}${endpoint}`
     const newOptions = {
       ...options,
@@ -18,22 +17,35 @@ export const request = (baseUrl: string) => {
       },
     }
 
-    return fetch(url, newOptions).then(async (response) => {
-      if (!response.ok) {
-        throw new FetchError(response)
-      }
-
-      try {
+    return fetch(url, newOptions)
+      .then(async (response) => {
         const data = await response.json()
 
+        return { data, response }
+      })
+      .then(async ({ data, response }) => {
+        if (!response.ok) {
+          const error = new FetchError(
+            response,
+            data,
+            `Error ${response.status}: ${response.statusText}`
+          )
+
+          throw error
+        }
+
         return data
-      } catch (error) {
-        return response
-      }
-    })
+      })
+      .catch((error) => {
+        if (error instanceof FetchError) {
+          throw error
+        }
+
+        throw new Error(error)
+      })
   }
 
-  const get = (endpoint: string, options?: http.RequestOptions) => {
+  const get = (endpoint: string, options?: RequestInit) => {
     const newOptions = {
       ...options,
       method: 'GET',

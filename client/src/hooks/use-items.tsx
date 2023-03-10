@@ -21,6 +21,8 @@ export const useItems = () => {
       .catch((err) => {
         setError(err.message)
         setLoading(false)
+
+        throw err
       })
   }
 

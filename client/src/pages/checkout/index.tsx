@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { useRouter } from 'next/router'
 import { Controller } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 
 import { Button, Container, Input, InputMask } from '@/components'
 import { useCart, useOrders } from '@/hooks'
@@ -20,7 +19,6 @@ const Checkout = () => {
     register,
   } = useForm()
   const { createOrder, error, loading: loadingCreateOrder } = useOrders()
-  const { t } = useTranslation()
 
   React.useEffect(() => {
     if (!cartItems.length) {
@@ -30,11 +28,29 @@ const Checkout = () => {
   }, [])
 
   const handleOnGoBack = () => router.back()
-  const handleOnSubmit = (data: OrdersRequest) =>
-    createOrder(data).then(() => {
-      router.replace(`/checkout/success`)
-      clearCart()
-    })
+  const handleOnSubmit = (data: OrdersRequest) => {
+    const payload = {
+      ...data,
+      credit_card_number: data.credit_card_number.replace(/\s/g, ''),
+      credit_card_expiration_at: data.credit_card_expiration_at.replace(
+        /\//g,
+        ''
+      ),
+      items: cartItems.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      })),
+    }
+
+    createOrder(payload)
+      .then(() => {
+        router.replace(`/checkout/success`)
+        clearCart()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   if (!cartItems.length) {
     return undefined
@@ -51,88 +67,91 @@ const Checkout = () => {
             alignSelf: 'flex-start !important',
           }}
         >
-          { t('pages.checkout.go-back') }
+          Go back
         </Button>
-        {loadingCreateOrder ? <p>{ t('pages.checkout.loading') }</p> : undefined}
         {error ? <p>{error}</p> : undefined}
-        {!loadingCreateOrder ? (
-          <S.Form onSubmit={handleSubmit(handleOnSubmit)}>
-            <S.Section>
-              <Controller
-                control={control}
-                name="card_number"
-                render={({
-                  field: { onBlur, onChange, ref, value },
-                  fieldState: { error: cardNumberError },
-                }) => (
-                  <InputMask
-                    mask="9999 9999 9999 9999"
-                    alwaysShowMask={false}
-                    maskPlaceholder=""
-                    type="text"
-                    placeholder={ t('pages.checkout.form.card-number') }
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    ref={ref}
-                    error={cardNumberError?.message}
-                  />
-                )}
-              />
-              <Input
-                type="text"
-                placeholder={ t('pages.checkout.form.card-holder-name') }
-                error={errors.card_holder_name?.message}
-                {...register('card_holder_name')}
-              />
-              <Controller
-                control={control}
-                name="card_cvv"
-                render={({
-                  field: { onBlur, onChange, ref, value },
-                  fieldState: { error: cardCvvError },
-                }) => (
-                  <InputMask
-                    mask="999"
-                    alwaysShowMask={false}
-                    maskPlaceholder=""
-                    type="text"
-                    placeholder={ t('pages.checkout.form.card-cvv') }
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    ref={ref}
-                    error={cardCvvError?.message}
-                  />
-                )}
-              />
-              <Controller
-                control={control}
-                name="card_expiration_at"
-                render={({
-                  field: { onBlur, onChange, ref, value },
-                  fieldState: { error: cardExpirationAtError },
-                }) => (
-                  <InputMask
-                    mask="99/99"
-                    alwaysShowMask={false}
-                    maskPlaceholder=""
-                    type="text"
-                    placeholder={ t('pages.checkout.form.card-expiration-at') }
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    ref={ref}
-                    error={cardExpirationAtError?.message}
-                  />
-                )}
-              />
-            </S.Section>
-            <Button colorScheme="green" variant="solid" fullWidth type="submit">
-              { t('pages.checkout.pay-it') }
-            </Button>
-          </S.Form>
-        ) : undefined}
+        <S.Form onSubmit={handleSubmit(handleOnSubmit)}>
+          <S.Section>
+            <Controller
+              control={control}
+              name="credit_card_number"
+              render={({
+                field: { onBlur, onChange, ref, value },
+                fieldState: { error: cardNumberError },
+              }) => (
+                <InputMask
+                  mask="9999 9999 9999 9999"
+                  alwaysShowMask={false}
+                  maskPlaceholder=""
+                  type="text"
+                  placeholder="Card number"
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  ref={ref}
+                  error={cardNumberError?.message}
+                />
+              )}
+            />
+            <Input
+              type="text"
+              placeholder="Card holder name"
+              error={errors.credit_card_holder_name?.message}
+              {...register('credit_card_holder_name')}
+            />
+            <Controller
+              control={control}
+              name="credit_card_cvv"
+              render={({
+                field: { onBlur, onChange, ref, value },
+                fieldState: { error: cardCvvError },
+              }) => (
+                <InputMask
+                  mask="999"
+                  alwaysShowMask={false}
+                  maskPlaceholder=""
+                  type="text"
+                  placeholder="CVV"
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  ref={ref}
+                  error={cardCvvError?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="credit_card_expiration_at"
+              render={({
+                field: { onBlur, onChange, ref, value },
+                fieldState: { error: cardExpirationAtError },
+              }) => (
+                <InputMask
+                  mask="99/99"
+                  alwaysShowMask={false}
+                  maskPlaceholder=""
+                  type="text"
+                  placeholder="Expiration at"
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  ref={ref}
+                  error={cardExpirationAtError?.message}
+                />
+              )}
+            />
+          </S.Section>
+          <Button
+            colorScheme="green"
+            variant="solid"
+            fullWidth
+            type="submit"
+            disabled={loadingCreateOrder}
+          >
+            Pay it!
+          </Button>
+        </S.Form>
       </S.Content>
     </Container>
   )

@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
 
 import { Button, Card, Cart, Container } from '@/components'
 import { useCart, useCategories, useItems } from '@/hooks'
@@ -32,7 +31,6 @@ const Home = () => {
     loading: loadingItems,
   } = useItems()
   const { addItem, items: cartItems, removeItem } = useCart()
-  const { t } = useTranslation()
 
   React.useEffect(() => {
     listCategories()
@@ -55,6 +53,7 @@ const Home = () => {
 
   const isLoading = loadingItems || loadingCategories
   const hasError = errorItems || errorCategories
+  const finishRequestWithItems = !isLoading && !hasError && items.length > 1
 
   return (
     <>
@@ -71,31 +70,35 @@ const Home = () => {
       </S.Header>
       <Container>
         <S.Showcase>
-          {isLoading ? <p>{ t('pages.home.loading') }</p> : undefined}
+          {isLoading ? <p>Loading...</p> : undefined}
           {!isLoading && hasError ? (
-            <p>{ t('pages.home.error') }</p>
+            <p>Error on retrieve items. Try again later.</p>
           ) : undefined}
-          {!isLoading && !hasError && items.length === 0 ? (
-            <p>{ t('pages.home.empty') }</p>
+          {!finishRequestWithItems ? (
+            <p>No items found.</p>
           ) : undefined}
-          {items.map((item) => (
-            <Card key={item.id}>
-              <S.ItemName>{item.name}</S.ItemName>
-              <p>{findCategory(categories, item.category_id)?.name}</p>
-              <p>{moneyFormat(item.price)}</p>
-              <Button
-                fullWidth
-                colorScheme="green"
-                variant="outline"
-                onClick={() => handleAddItem(item)}
-                css={{
-                  marginTop: '$4',
-                }}
-              >
-                { t('pages.home.items.add-to-cart') }
-              </Button>
-            </Card>
-          ))}
+          {
+            finishRequestWithItems ? (
+              items.map((item) => (
+                <Card key={item.id}>
+                  <S.ItemName>{item.name}</S.ItemName>
+                  <p>{findCategory(categories, item.category_id)?.name}</p>
+                  <p>{moneyFormat(item.price)}</p>
+                  <Button
+                    fullWidth
+                    colorScheme="green"
+                    variant="outline"
+                    onClick={() => handleAddItem(item)}
+                    css={{
+                      marginTop: '$4',
+                    }}
+                  >
+                    Add to cart
+                  </Button>
+                </Card>
+              ))
+            ) : undefined
+          }
         </S.Showcase>
       </Container>
     </>

@@ -1,5 +1,5 @@
 client-up:
-	cd client && docker-compose up
+	cd client && docker-compose up -d
 client-bash:
 	cd client && docker exec -it client /bin/bash
 client-down:
@@ -9,7 +9,7 @@ client-clean:
 client-prune:
 	cd client && docker rmi client-client
 api-up:
-	cd api && docker-compose up api
+	cd api && docker-compose up api -d && docker exec api npm run prisma:migration-dev && docker exec api npm run prisma:seed
 api-bash:
 	cd api && docker exec -it api /bin/bash
 api-down:
@@ -28,5 +28,3 @@ docs-clean:
 	cd client && docker rm docs
 docs-prune:
 	cd client && docker rmi api-docs
-
-
